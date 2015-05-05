@@ -13,8 +13,23 @@ s/@XONE@/ione/g
 s/@RZERO@/izero/g
 s/@RONE@/ione/g
 
+/^ *@NOTIS@ *$/,/^ *@NOTIE@ *$/d
+/^ *@IS@ *$/d
+/^ *@IE@ *$/d
+/^ *@CS@ *$/,/^ *@CE@ *$/d
+/^ *@NOTCS@ *$/d
+/^ *@NOTCE@ *$/d
+
 s/@DOT@/idot/g
 s/@NRM2@/inrm2/g
 
+
 s/@MPI_TYPE@/psb_mpi_ipk_integer/g
 s/@PSB_SWAP_TAG@/psb_int_swap_tag/g
+
+s/@SPGPU_TYPE@/spgpu_type_int/g
+
+s/@CTYPE@/Int/g
+s/@FLAG_COMPLEX@//g
+s/@FCKIND@/c_int/g
+s/@FRCKIND@/c_int/g

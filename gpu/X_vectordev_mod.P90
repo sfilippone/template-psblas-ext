@@ -154,8 +154,9 @@ module psb_@X@_vectordev_mod
   ! New gather functions
 
   interface 
-    function igathMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, hostVec, indexBase) &
-	& result(res) bind(c,name='igathMultiVecDevice@CTYPE@')
+    function igathMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, &
+         & hostVec, indexBase) &
+         & result(res) bind(c,name='igathMultiVecDevice@CTYPE@')
       use iso_c_binding
       integer(c_int)      :: res
       type(c_ptr), value  :: deviceVec
@@ -168,8 +169,9 @@ module psb_@X@_vectordev_mod
   end interface
 
   interface 
-    function igathMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, hostVec, indexBase) &
-	& result(res) bind(c,name='igathMultiVecDevice@CTYPE@VecIdx')
+    function igathMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, &
+         & hostVec, indexBase) &
+         & result(res) bind(c,name='igathMultiVecDevice@CTYPE@VecIdx')
       use iso_c_binding
       integer(c_int)      :: res
       type(c_ptr), value  :: deviceVec
@@ -183,8 +185,9 @@ module psb_@X@_vectordev_mod
 
 
   interface 
-    function iscatMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, hostVec, indexBase, beta) &
-	& result(res) bind(c,name='iscatMultiVecDevice@CTYPE@')
+    function iscatMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, &
+         & hostVec, indexBase, beta) &
+         & result(res) bind(c,name='iscatMultiVecDevice@CTYPE@')
       use iso_c_binding
       integer(c_int)         :: res
       type(c_ptr), value     :: deviceVec
@@ -199,8 +202,9 @@ module psb_@X@_vectordev_mod
 
 
   interface 
-    function iscatMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, hostVec, indexBase, beta) &
-	& result(res) bind(c,name='iscatMultiVecDevice@CTYPE@VecIdx')
+    function iscatMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, &
+         & hostVec, indexBase, beta) &
+         & result(res) bind(c,name='iscatMultiVecDevice@CTYPE@VecIdx')
       use iso_c_binding
       integer(c_int)         :: res
       type(c_ptr), value     :: deviceVec
@@ -213,6 +217,20 @@ module psb_@X@_vectordev_mod
     end function iscatMultiVecDevice@CTYPE@VecIdx
   end interface
 
+
+!!$  interface 
+!!$    function geinsMultiVecDevice@CTYPE@(n,deviceVecIrl,deviceVecVal,&
+!!$         & dupl,indexbase,deviceVecX) &
+!!$         & result(res) bind(c,name='geinsMultiVecDevice@CTYPE@')
+!!$      use iso_c_binding
+!!$      integer(c_int)      :: res
+!!$      integer(c_int), value :: n, dupl,indexbase
+!!$      type(c_ptr), value  :: deviceVecIrl, deviceVecVal, deviceVecX
+!!$    end function geinsMultiVecDeviceDouble
+!!$  end interface
+
+
+  @NOTIS@
   interface dotMultiVecDevice
     function dotMultiVecDevice@CTYPE@(res, n,deviceVecA,deviceVecB) &
          & result(val) bind(c,name='dotMultiVecDevice@CTYPE@')
@@ -223,7 +241,6 @@ module psb_@X@_vectordev_mod
       type(c_ptr), value    :: deviceVecA, deviceVecB
     end function dotMultiVecDevice@CTYPE@
   end interface
-
     
   interface nrm2MultiVecDevice@FLAG_COMPLEX@
     function nrm2MultiVecDevice@CTYPE@(res,n,deviceVecA) &
@@ -258,18 +275,6 @@ module psb_@X@_vectordev_mod
     end function asumMultiVecDevice@CTYPE@
   end interface
 
- 
-
-!!$  interface 
-!!$    function geinsMultiVecDevice@CTYPE@(n,deviceVecIrl,deviceVecVal,&
-!!$         & dupl,indexbase,deviceVecX) &
-!!$         & result(res) bind(c,name='geinsMultiVecDevice@CTYPE@')
-!!$      use iso_c_binding
-!!$      integer(c_int)      :: res
-!!$      integer(c_int), value :: n, dupl,indexbase
-!!$      type(c_ptr), value  :: deviceVecIrl, deviceVecVal, deviceVecX
-!!$    end function geinsMultiVecDeviceDouble
-!!$  end interface
 
   interface axpbyMultiVecDevice
     function axpbyMultiVecDevice@CTYPE@(n,alpha,deviceVecA,beta,deviceVecB) &
@@ -303,6 +308,7 @@ module psb_@X@_vectordev_mod
       type(c_ptr), value          :: deviceVecA, deviceVecB,deviceVecZ
     end function axybzMultiVecDevice@CTYPE@
   end interface
+  @NOTIE@
 
   interface inner_register
     module procedure inner_register@CTYPE@
