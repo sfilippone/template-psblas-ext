@@ -84,8 +84,6 @@ module psb_@X@_vectordev_mod
     end function readMultiVecDevice@CTYPE@R2
   end interface 
 
-    
-
   interface allocate@CTYPE@
     function allocate@CTYPE@(didx,n) &
          & result(res) bind(c,name='allocate@CTYPE@') 
@@ -112,6 +110,14 @@ module psb_@X@_vectordev_mod
       @TYPE@(@FCKIND@)       :: hidx(*)
       integer(c_int),value :: n
     end function write@CTYPE@
+    function write@CTYPE@First(first,didx,hidx,n,IndexBase) &
+         & result(res) bind(c,name='write@CTYPE@First')
+      use iso_c_binding
+      integer(c_int) :: res
+      type(c_ptr), value   :: didx
+      @TYPE@(@FCKIND@)     :: hidx(*)
+      integer(c_int),value :: n, first, IndexBase
+    end function write@CTYPE@First
     function writeMulti@CTYPE@(didx,hidx,m,n) &
          & result(res) bind(c,name='writeMulti@CTYPE@')
       use iso_c_binding
@@ -131,6 +137,14 @@ module psb_@X@_vectordev_mod
       @TYPE@(@FCKIND@)       :: hidx(*)
       integer(c_int),value :: n
     end function read@CTYPE@
+    function read@CTYPE@First(first,didx,hidx,n,IndexBase) &
+         & result(res) bind(c,name='read@CTYPE@First')
+      use iso_c_binding
+      integer(c_int) :: res
+      type(c_ptr), value   :: didx
+      @TYPE@(@FCKIND@)     :: hidx(*)
+      integer(c_int),value :: n, first, IndexBase
+    end function read@CTYPE@First
     function readMulti@CTYPE@(didx,hidx,m,n) &
          & result(res) bind(c,name='readMulti@CTYPE@')
       use iso_c_binding
@@ -149,19 +163,28 @@ module psb_@X@_vectordev_mod
     end subroutine free@CTYPE@
   end interface
   
-
+  interface 
+    function geinsMultiVecDevice@CTYPE@(n,deviceVecIrl,deviceVecVal,&
+         & dupl,indexbase,deviceVecX) &
+         & result(res) bind(c,name='geinsMultiVecDevice@CTYPE@')
+      use iso_c_binding
+      integer(c_int)      :: res
+      integer(c_int), value :: n, dupl,indexbase
+      type(c_ptr), value  :: deviceVecIrl, deviceVecVal, deviceVecX
+    end function geinsMultiVecDevice@CTYPE@
+  end interface
 
   ! New gather functions
 
   interface 
-    function igathMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, &
-         & hostVec, indexBase) &
+    function igathMultiVecDevice@CTYPE@(deviceVec, vectorId, n, first, idx, &
+         & hfirst, hostVec, indexBase) &
          & result(res) bind(c,name='igathMultiVecDevice@CTYPE@')
       use iso_c_binding
       integer(c_int)      :: res
       type(c_ptr), value  :: deviceVec
       integer(c_int),value:: vectorId
-      integer(c_int),value:: first, n
+      integer(c_int),value:: first, n, hfirst
       type(c_ptr),value	  :: idx
       type(c_ptr),value   :: hostVec
       integer(c_int),value:: indexBase
@@ -169,30 +192,29 @@ module psb_@X@_vectordev_mod
   end interface
 
   interface 
-    function igathMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, &
-         & hostVec, indexBase) &
+    function igathMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, n, first, idx, &
+         & hfirst, hostVec, indexBase) &
          & result(res) bind(c,name='igathMultiVecDevice@CTYPE@VecIdx')
       use iso_c_binding
       integer(c_int)      :: res
       type(c_ptr), value  :: deviceVec
       integer(c_int),value:: vectorId
-      integer(c_int),value:: first, n
+      integer(c_int),value:: first, n, hfirst
       type(c_ptr),value	  :: idx
       type(c_ptr),value   :: hostVec
       integer(c_int),value:: indexBase
     end function igathMultiVecDevice@CTYPE@VecIdx
   end interface
 
-
   interface 
-    function iscatMultiVecDevice@CTYPE@(deviceVec, vectorId, first, n, idx, &
-         & hostVec, indexBase, beta) &
+    function iscatMultiVecDevice@CTYPE@(deviceVec, vectorId, & 
+         & first, n, idx, hfirst, hostVec, indexBase, beta) &
          & result(res) bind(c,name='iscatMultiVecDevice@CTYPE@')
       use iso_c_binding
       integer(c_int)         :: res
       type(c_ptr), value     :: deviceVec
       integer(c_int),value   :: vectorId
-      integer(c_int),value   :: first, n
+      integer(c_int),value   :: first, n, hfirst
       type(c_ptr), value     :: idx
       type(c_ptr), value     :: hostVec
       integer(c_int),value   :: indexBase
@@ -200,34 +222,21 @@ module psb_@X@_vectordev_mod
     end function iscatMultiVecDevice@CTYPE@
   end interface
 
-
   interface 
-    function iscatMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, first, n, idx, &
-         & hostVec, indexBase, beta) &
+    function iscatMultiVecDevice@CTYPE@VecIdx(deviceVec, vectorId, &
+         & first, n, idx, hfirst, hostVec, indexBase, beta) &
          & result(res) bind(c,name='iscatMultiVecDevice@CTYPE@VecIdx')
       use iso_c_binding
       integer(c_int)         :: res
       type(c_ptr), value     :: deviceVec
       integer(c_int),value   :: vectorId
-      integer(c_int),value   :: first, n
+      integer(c_int),value   :: first, n, hfirst
       type(c_ptr), value     :: idx
       type(c_ptr), value     :: hostVec
       integer(c_int),value   :: indexBase
       @TYPE@(@FCKIND@),value :: beta
     end function iscatMultiVecDevice@CTYPE@VecIdx
   end interface
-
-
-!!$  interface 
-!!$    function geinsMultiVecDevice@CTYPE@(n,deviceVecIrl,deviceVecVal,&
-!!$         & dupl,indexbase,deviceVecX) &
-!!$         & result(res) bind(c,name='geinsMultiVecDevice@CTYPE@')
-!!$      use iso_c_binding
-!!$      integer(c_int)      :: res
-!!$      integer(c_int), value :: n, dupl,indexbase
-!!$      type(c_ptr), value  :: deviceVecIrl, deviceVecVal, deviceVecX
-!!$    end function geinsMultiVecDeviceDouble
-!!$  end interface
 
 
   @NOTIS@
