@@ -240,6 +240,16 @@ module psb_@X@_vectordev_mod
 
 
   @NOTIS@
+  interface scalMultiVecDevice
+    function scalMultiVecDevice@CTYPE@(alpha,deviceVecA) &
+         & result(val) bind(c,name='scalMultiVecDevice@CTYPE@')
+      use iso_c_binding
+      integer(c_int)        :: res
+      @TYPE@(@FCKIND@), value :: alpha
+      type(c_ptr), value    :: deviceVecA
+    end function scalMultiVecDevice@CTYPE@
+  end interface
+
   interface dotMultiVecDevice
     function dotMultiVecDevice@CTYPE@(res, n,deviceVecA,deviceVecB) &
          & result(val) bind(c,name='dotMultiVecDevice@CTYPE@')
