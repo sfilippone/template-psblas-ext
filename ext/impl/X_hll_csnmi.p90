@@ -48,6 +48,7 @@ function psb_@X@_hll_csnmi(a) result(res)
 
   info = 0
   res = @RZERO@ 
+  if (a%is_dev()) call a%sync()
   
   n = a%get_ncols()
   m = a%get_nrows()

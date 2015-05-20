@@ -38,6 +38,7 @@ function psb_@X@_hll_maxval(a) result(res)
   class(psb_@X@_hll_sparse_mat), intent(in) :: a
   @RTYPE@(@FKIND@)     :: res
 
+  if (a%is_dev()) call a%sync()
   res = maxval(abs(a%val(:)))
   if (a%is_unit()) res = max(res,@RONE@)
  

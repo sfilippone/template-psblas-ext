@@ -51,7 +51,7 @@ function psb_@X@_hll_csnm1(a) result(res)
 
   
   res = @RZERO@ 
-  
+  if (a%is_dev()) call a%sync()
   n = a%get_ncols()
   m = a%get_nrows()
   allocate(vt(n),stat=info)
