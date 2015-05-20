@@ -46,7 +46,7 @@ module psb_@X@_csrg_mat_mod
     ! 
 #ifdef HAVE_SPGPU
     type(@X@_Cmat) :: deviceMat
-
+    
   contains
     procedure, nopass  :: get_fmt       => @X@_csrg_get_fmt
     procedure, pass(a) :: sizeof        => @X@_csrg_sizeof
@@ -237,6 +237,7 @@ contains
     implicit none 
     class(psb_@X@_csrg_sparse_mat), intent(in) :: a
     integer(psb_long_int_k_) :: res
+    if (a%is_dev()) call a%sync()
     res = 8 
     res = res + @SIZET@  * size(a%val)
     res = res + psb_sizeof_int * size(a%irp)
