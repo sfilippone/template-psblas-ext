@@ -340,6 +340,26 @@ module psb_@X@_vectordev_mod
       type(c_ptr), value          :: deviceVecA, deviceVecB,deviceVecZ
     end function axybzMultiVecDevice@CTYPE@
   end interface
+
+
+  interface absMultiVecDevice
+    function absMultiVecDevice@CTYPE@(n,alpha,deviceVecA) &
+         & result(res) bind(c,name='absMultiVecDevice@CTYPE@')
+      use iso_c_binding
+      integer(c_int)        :: res
+      integer(c_int), value :: n
+      @TYPE@(@FCKIND@), value :: alpha
+      type(c_ptr), value    :: deviceVecA
+    end function absMultiVecDevice@CTYPE@
+    function absMultiVecDevice@CTYPE@2(n,alpha,deviceVecA,deviceVecB) &
+         & result(res) bind(c,name='absMultiVecDevice@CTYPE@2')
+      use iso_c_binding
+      integer(c_int)        :: res
+      integer(c_int), value :: n
+      @TYPE@(@FCKIND@), value :: alpha
+      type(c_ptr), value    :: deviceVecA, deviceVecB
+    end function absMultiVecDevice@CTYPE@2
+  end interface
   @NOTIE@
 
   interface inner_register
