@@ -95,7 +95,8 @@ X_mv_hdia_to_coo.p90 \
 X_mv_hll_from_coo.p90 \
 X_mv_hll_from_fmt.p90 \
 X_mv_hll_to_coo.p90 \
-X_mv_hll_to_fmt.p90
+X_mv_hll_to_fmt.p90 \
+X_dns_mat_impl.p90
 
 SRCI=Xi_convert_hll_from_coo.p90 \
 Xi_convert_dia_from_coo.p90 \
