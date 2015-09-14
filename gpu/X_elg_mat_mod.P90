@@ -368,7 +368,7 @@ contains
     class(psb_@X@_elg_sparse_mat), pointer :: tmpa
     integer(psb_ipk_) :: info
 
-    tmpa=>a
+    tmpa => a
     if (tmpa%is_host()) then 
       call tmpa%to_gpu(info)
     else if (tmpa%is_dev()) then 

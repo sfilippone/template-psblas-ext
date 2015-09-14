@@ -20,6 +20,7 @@ X_csrg_mold.P90 \
 X_csrg_reallocate_nz.P90 \
 X_csrg_scal.P90 \
 X_csrg_scals.P90 \
+X_csrg_from_gpu.P90 \
 X_csrg_to_gpu.P90 \
 X_csrg_vect_mv.P90 \
 X_elg_allocate_mnnz.P90 \

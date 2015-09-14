@@ -66,7 +66,9 @@ module psb_@X@_csrg_mat_mod
     procedure, pass(a) :: mv_from_fmt   => psb_@X@_mv_csrg_from_fmt
     procedure, pass(a) :: free          => @X@_csrg_free
     procedure, pass(a) :: mold          => psb_@X@_csrg_mold
+    procedure, pass(a) :: sync          => @X@_csrg_sync
     procedure, pass(a) :: to_gpu        => psb_@X@_csrg_to_gpu
+    procedure, pass(a) :: from_gpu      => psb_@X@_csrg_from_gpu
 #ifdef HAVE_FINAL
     final              :: @X@_csrg_finalize
 #endif
@@ -139,6 +141,14 @@ module psb_@X@_csrg_mat_mod
       integer(psb_ipk_), intent(out)              :: info
       integer(psb_ipk_), intent(in), optional     :: nzrm
     end subroutine psb_@X@_csrg_to_gpu
+  end interface
+
+  interface 
+    subroutine psb_@X@_csrg_from_gpu(a,info) 
+      import :: psb_@X@_csrg_sparse_mat, psb_ipk_
+      class(psb_@X@_csrg_sparse_mat), intent(inout) :: a
+      integer(psb_ipk_), intent(out)             :: info
+    end subroutine psb_@X@_csrg_from_gpu
   end interface
 
   interface 
@@ -267,6 +277,24 @@ contains
   !
   !
   ! == ===================================  
+
+
+  subroutine  @X@_csrg_sync(a) 
+    implicit none 
+    class(psb_@X@_csrg_sparse_mat), target, intent(in) :: a
+    class(psb_@X@_csrg_sparse_mat), pointer :: tmpa
+    integer(psb_ipk_) :: info
+
+    tmpa => a
+    if (tmpa%is_host()) then 
+      call tmpa%to_gpu(info)
+    else if (tmpa%is_dev()) then 
+      call tmpa%from_gpu(info)
+    end if
+    call tmpa%set_sync()
+    return
+
+  end subroutine @X@_csrg_sync
 
   subroutine  @X@_csrg_free(a) 
     use cusparse_mod
