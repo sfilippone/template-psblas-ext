@@ -45,6 +45,7 @@ X_hlg_mold.P90 \
 X_hlg_reallocate_nz.P90 \
 X_hlg_scal.P90 \
 X_hlg_scals.P90 \
+X_hlg_from_gpu.P90 \
 X_hlg_to_gpu.P90 \
 X_hlg_vect_mv.P90 \
 X_hybg_allocate_mnnz.P90 \
