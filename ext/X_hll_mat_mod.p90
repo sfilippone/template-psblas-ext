@@ -64,6 +64,7 @@ module psb_@X@_hll_mat_mod
     procedure, pass(a) :: get_hksz     => @X@_hll_get_hksz
     procedure, pass(a) :: set_hksz     => @X@_hll_set_hksz
     procedure, pass(a) :: get_size     => @X@_hll_get_size
+    procedure, pass(a) :: set_nzeros   => @X@_hll_set_nzeros
     procedure, pass(a) :: get_nzeros   => @X@_hll_get_nzeros
     procedure, nopass  :: get_fmt      => @X@_hll_get_fmt
     procedure, pass(a) :: sizeof       => @X@_hll_sizeof
@@ -103,7 +104,8 @@ module psb_@X@_hll_mat_mod
   end type psb_@X@_hll_sparse_mat
 
   private :: @X@_hll_get_nzeros, @X@_hll_free,  @X@_hll_get_fmt, &
-       & @X@_hll_get_size, @X@_hll_sizeof, @X@_hll_get_nz_row
+       & @X@_hll_get_size, @X@_hll_sizeof, @X@_hll_get_nz_row, &
+       & @X@_hll_set_nzeros, @X@_hll_get_hksz, @X@_hll_set_hksz
 
   interface
     subroutine  psb_@X@_hll_reallocate_nz(nz,a) 
@@ -450,6 +452,14 @@ contains
     character(len=5) :: res
     res = 'HLL'
   end function @X@_hll_get_fmt
+
+  subroutine  @X@_hll_set_nzeros(a,n) 
+    implicit none 
+    class(psb_@X@_hll_sparse_mat), intent(inout) :: a
+    integer(psb_ipk_), intent(in)              :: n
+    
+    a%nzt = n
+  end subroutine @X@_hll_set_nzeros
   
   function @X@_hll_get_nzeros(a) result(res)
     implicit none 
