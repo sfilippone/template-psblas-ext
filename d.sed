@@ -15,12 +15,12 @@ s/@RONE@/done/g
 
 s/@DOT@/ddot/g
 s/@NRM2@/dnrm2/g
-/^ *@IS@ *$/,/^ *@IE@ *$/d
-/^ *@NOTIS@ *$/d
-/^ *@NOTIE@ *$/d
-/^ *@CS@ *$/,/^ *@CE@ *$/d
-/^ *@NOTCS@ *$/d
-/^ *@NOTCE@ *$/d
+/^ *@INTS@ *$/,/^ *@INTE@ *$/d
+/^ *@NOTINTS@ *$/d
+/^ *@NOTINTE@ *$/d
+/^ *@CPLXS@ *$/,/^ *@CPLXE@ *$/d
+/^ *@REALS@ *$/d
+/^ *@REALE@ *$/d
 
 
 s/@MPI_TYPE@/psb_mpi_r_dpk_/g

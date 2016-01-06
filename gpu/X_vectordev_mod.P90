@@ -252,7 +252,7 @@ module psb_@X@_vectordev_mod
   end interface
 
 
-  @NOTIS@
+  @NOTINTS@
   interface scalMultiVecDevice
     function scalMultiVecDevice@CTYPE@(alpha,deviceVecA) &
          & result(val) bind(c,name='scalMultiVecDevice@CTYPE@')
@@ -360,7 +360,7 @@ module psb_@X@_vectordev_mod
       type(c_ptr), value    :: deviceVecA, deviceVecB
     end function absMultiVecDevice@CTYPE@2
   end interface
-  @NOTIE@
+  @NOTINTE@
 
   interface inner_register
     module procedure inner_register@CTYPE@

@@ -35,14 +35,14 @@ module psb_@X@_gpu_vect_mod
   use psb_const_mod
   use psb_error_mod
   use psb_@X@_vect_mod
-  @NOTIS@
+  @NOTINTS@
   use psb_i_vect_mod
-  @NOTIE@
+  @NOTINTE@
 #ifdef HAVE_SPGPU
-  @NOTIS@
+  @NOTINTS@
   use psb_i_gpu_vect_mod
   use psb_i_vectordev_mod
-  @NOTIE@
+  @NOTINTE@
   use psb_@X@_vectordev_mod
 #endif
 
@@ -91,7 +91,7 @@ module psb_@X@_gpu_vect_mod
     procedure, pass(x) :: new_buffer   => @X@_gpu_new_buffer
     procedure, nopass  :: device_wait  => @X@_gpu_device_wait
     procedure, pass(x) :: free_buffer  => @X@_gpu_free_buffer
-    @NOTIS@
+    @NOTINTS@
     procedure, pass(x) :: dot_v    => @X@_gpu_dot_v
     procedure, pass(x) :: dot_a    => @X@_gpu_dot_a
     procedure, pass(y) :: axpby_v  => @X@_gpu_axpby_v
@@ -106,7 +106,7 @@ module psb_@X@_gpu_vect_mod
     procedure, pass(x) :: asum     => @X@_gpu_asum
     procedure, pass(x) :: absval1  => @X@_gpu_absval1
     procedure, pass(x) :: absval2  => @X@_gpu_absval2
-    @NOTIE@
+    @NOTINTE@
 
 #ifdef HAVE_FINAL
     final              :: @X@_gpu_vect_finalize
@@ -821,7 +821,7 @@ contains
 !!$  end subroutine @X@_gpu_set_vect
 
 
-  @NOTIS@
+  @NOTINTS@
 
   function @X@_gpu_dot_v(n,x,y) result(res)
     implicit none 
@@ -1123,7 +1123,7 @@ contains
     end select
   end subroutine @X@_gpu_absval2
 
-  @NOTIE@
+  @NOTINTE@
 
 #ifdef HAVE_FINAL
   subroutine @X@_gpu_vect_finalize(x)
@@ -1217,13 +1217,13 @@ module psb_@X@_gpu_multivect_mod
   use psb_@X@_multivect_mod
   use psb_@X@_base_multivect_mod
 
-  @NOTIS@
+  @NOTINTS@
   use psb_i_multivect_mod
-  @NOTIE@
+  @NOTINTE@
 #ifdef HAVE_SPGPU
-  @NOTIS@
+  @NOTINTS@
   use psb_i_gpu_multivect_mod
-  @NOTIE@
+  @NOTINTE@
   use psb_@X@_vectordev_mod
 #endif
 
