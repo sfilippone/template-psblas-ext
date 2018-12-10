@@ -1,5 +1,5 @@
-#include ../../Make.inc
 TOP=../..
+include $(TOP)/Make.inc
 BASIC_MODS=
 UTIL_MODS =
 
@@ -100,6 +100,8 @@ sdcompl:
 
 bsrc: $(FSRC)
 
+cpy: 
+	($(TOP)/cpy.sh $(TOP) $(TARGET)/gpu/impl *.f90 *.F90)
 
 
 $(FSRC1): psb_$(ARITH)%.f90 : X%.p90

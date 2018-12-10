@@ -1,5 +1,5 @@
-#include ../../Make.inc
 TOP=..
+include $(TOP)/Make.inc
 BASIC_MODS=
 UTIL_MODS =
 
@@ -62,6 +62,9 @@ bsrc: $(FSRC)
 
 lib: $(FOBJS)
 
+cpy: 
+	($(TOP)/cpy.sh $(TOP) $(TARGET)/ext *.f90 *.F90)
+	cd impl && $(MAKE) cpy
 
 
 $(FSRC1): psb_$(ARITH)%.f90 : X%.p90
