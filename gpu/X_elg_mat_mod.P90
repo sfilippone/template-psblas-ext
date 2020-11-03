@@ -85,9 +85,7 @@ module psb_@X@_elg_mat_mod
     procedure, pass(a) :: from_gpu      => psb_@X@_elg_from_gpu
     procedure, pass(a) :: to_gpu        => psb_@X@_elg_to_gpu
     procedure, pass(a) :: asb           => psb_@X@_elg_asb
-#ifdef HAVE_FINAL
     final              :: @X@_elg_finalize
-#endif
 #else 
   contains
     procedure, pass(a) :: mold         => psb_@X@_elg_mold
@@ -450,7 +448,6 @@ contains
     res = (a%devstate == is_sync)
   end function @X@_elg_is_sync
 
-#ifdef HAVE_FINAL
   subroutine  @X@_elg_finalize(a) 
     use elldev_mod
     implicit none 
@@ -462,7 +459,6 @@ contains
     return
 
   end subroutine @X@_elg_finalize
-#endif
 
 #else 
 

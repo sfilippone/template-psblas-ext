@@ -61,9 +61,7 @@ module psb_@X@_hdiag_mat_mod
     procedure, pass(a) :: free          => @X@_hdiag_free
     procedure, pass(a) :: mold          => psb_@X@_hdiag_mold
     procedure, pass(a) :: to_gpu        => psb_@X@_hdiag_to_gpu
-#ifdef HAVE_FINAL
     final              :: @X@_hdiag_finalize
-#endif
 #else 
   contains
     procedure, pass(a) :: mold         => psb_@X@_hdiag_mold
@@ -261,7 +259,6 @@ contains
 
   end subroutine @X@_hdiag_free
 
-#ifdef HAVE_FINAL
   subroutine  @X@_hdiag_finalize(a) 
     use hdiagdev_mod
     implicit none 
@@ -274,7 +271,6 @@ contains
     
     return
   end subroutine @X@_hdiag_finalize
-#endif
 
 #else 
 
