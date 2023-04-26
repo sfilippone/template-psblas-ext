@@ -123,11 +123,10 @@ module psb_@X@_hdiag_mat_mod
   end interface
 
   interface 
-    subroutine psb_@X@_hdiag_to_gpu(a,info, nzrm) 
+    subroutine psb_@X@_hdiag_to_gpu(a,info) 
       import :: psb_@X@_hdiag_sparse_mat, psb_ipk_
       class(psb_@X@_hdiag_sparse_mat), intent(inout) :: a
       integer(psb_ipk_), intent(out)             :: info
-      integer(psb_ipk_), intent(in), optional    :: nzrm
     end subroutine psb_@X@_hdiag_to_gpu
   end interface
 
